@@ -1,0 +1,12 @@
+{
+  "name": "mobile",
+  "displayName": "Mobile Team",
+  "description": "React Native, Flutter, iOS, Android, and cross-platform app development",
+  "extends": "_core",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [],
+  "mcp": []
+}

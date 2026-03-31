@@ -1,0 +1,12 @@
+{
+  "name": "qa",
+  "displayName": "QA Team",
+  "description": "Test automation, E2E testing, security testing, and quality assurance",
+  "extends": "_core",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [],
+  "mcp": []
+}

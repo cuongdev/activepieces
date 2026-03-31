@@ -69,10 +69,10 @@ RUN --mount=type=cache,target=/root/.bun/install/cache \
 # Copy remaining source code (turbo config, etc.)
 COPY . .
 
-# Build frontend, engine, server API, and worker
-RUN npx turbo run build --filter=web --filter=@activepieces/engine --filter=api --filter=worker
+# Build frontend, engine, server API, worker, and custom local pieces
+RUN npx turbo run build --filter=web --filter=@activepieces/engine --filter=api --filter=worker --filter=@activepieces/piece-gitlab --filter=@activepieces/piece-openproject
 
-# Remove piece directories not needed at runtime (keeps only the 4 pieces api imports)
+# Remove piece directories not needed at runtime (keeps only the 4 pieces api imports + local overrides)
 # Then regenerate bun.lock so it matches the trimmed workspace
 RUN rm -rf packages/pieces/core packages/pieces/custom && \
     find packages/pieces/community -mindepth 1 -maxdepth 1 -type d \
@@ -80,6 +80,8 @@ RUN rm -rf packages/pieces/core packages/pieces/custom && \
       ! -name square \
       ! -name facebook-leads \
       ! -name intercom \
+      ! -name gitlab \
+      ! -name openproject \
       -exec rm -rf {} + && \
     rm -f bun.lock && bun install
 

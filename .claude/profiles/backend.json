@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "displayName": "Backend Team",
+  "description": "API design, database architecture, server-side logic, and backend services",
+  "extends": "_core",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [],
+  "mcp": []
+}

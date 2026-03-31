@@ -127,6 +127,34 @@ export const OPEN_SOURCE_PLAN: PlatformPlanWithOnlyLimits = {
     aiCreditsAutoTopUpState: AiCreditsAutoTopUpState.DISABLED,
 }
 
+export const SELF_HOSTED_ENTERPRISE_PLAN: PlatformPlanWithOnlyLimits = {
+    plan: PlanName.ENTERPRISE,
+    tablesEnabled: true,
+    eventStreamingEnabled: true,
+    includedAiCredits: 0,
+    aiCreditsAutoTopUpState: AiCreditsAutoTopUpState.DISABLED,
+    embeddingEnabled: true,
+    agentsEnabled: true,
+    globalConnectionsEnabled: true,
+    customRolesEnabled: true,
+    environmentsEnabled: true,
+    analyticsEnabled: true,
+    showPoweredBy: false,
+    auditLogEnabled: true,
+    managePiecesEnabled: true,
+    manageTemplatesEnabled: true,
+    customAppearanceEnabled: true,
+    teamProjectsLimit: TeamProjectsLimit.UNLIMITED,
+    projectRolesEnabled: true,
+    customDomainsEnabled: true,
+    apiKeysEnabled: true,
+    ssoEnabled: true,
+    secretManagersEnabled: true,
+    scimEnabled: true,
+    projectsLimit: null,
+    activeFlowsLimit: null,
+}
+
 export const APPSUMO_PLAN = (planName: PlanName): PlatformPlanWithOnlyLimits => ({
     ...STANDARD_CLOUD_PLAN,
     plan: planName,

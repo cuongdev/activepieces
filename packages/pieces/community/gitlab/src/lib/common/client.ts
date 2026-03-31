@@ -12,8 +12,13 @@ import {
   ProjectWebhookRequest,
   ProjectWebhook,
 } from './models';
+
 export class GitlabApi {
-  constructor(private accessToken: string) {}
+  private apiBase: string;
+
+  constructor(private accessToken: string, baseUrl = 'https://gitlab.com') {
+    this.apiBase = `${baseUrl.replace(/\/$/, '')}/api/v4`;
+  }
 
   async makeRequest<T extends HttpMessageBody>(
     method: HttpMethod,
@@ -23,7 +28,7 @@ export class GitlabApi {
   ): Promise<T> {
     const res = await httpClient.sendRequest<T>({
       method,
-      url: 'https://gitlab.com/api/v4' + url,
+      url: this.apiBase + url,
       queryParams: query,
       body,
       authentication: {
@@ -33,6 +38,7 @@ export class GitlabApi {
     });
     return res.body;
   }
+
   async listProjects(request: ListProjectsRequest) {
     return this.makeRequest<GitlabProject[]>(
       HttpMethod.GET,
@@ -40,6 +46,7 @@ export class GitlabApi {
       prepareQuery(request)
     );
   }
+
   async createProjectIssue(
     projectId: string,
     request: CreateProjectIssueRequest
@@ -51,6 +58,7 @@ export class GitlabApi {
       request
     );
   }
+
   async subscribeProjectWebhook(
     projectId: string,
     request: ProjectWebhookRequest
@@ -62,6 +70,7 @@ export class GitlabApi {
       request
     );
   }
+
   async unsubscribeProjectWebhook(projectId: string, webhookId: string) {
     return this.makeRequest(
       HttpMethod.DELETE,
@@ -72,14 +81,14 @@ export class GitlabApi {
 }
 
 function emptyValueFilter(
-  accessor: (key: string) => any
+  accessor: (key: string) => unknown
 ): (key: string) => boolean {
   return (key: string) => {
     const val = accessor(key);
     return (
       val !== null &&
       val !== undefined &&
-      (typeof val != 'string' || val.length > 0)
+      (typeof val !== 'string' || val.length > 0)
     );
   };
 }
@@ -90,7 +99,7 @@ export function prepareQuery(request?: Record<string, any>): QueryParams {
   Object.keys(request)
     .filter(emptyValueFilter((k) => request[k]))
     .forEach((k: string) => {
-      params[k] = (request as Record<string, any>)[k].toString();
+      params[k] = String((request as Record<string, any>)[k]);
     });
   return params;
 }

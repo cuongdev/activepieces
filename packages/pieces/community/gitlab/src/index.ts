@@ -2,12 +2,20 @@ import { createCustomApiCallAction } from '@activepieces/pieces-common';
 import {
   createPiece,
   OAuth2PropertyValue,
-  PieceAuth,
 } from '@activepieces/pieces-framework';
 import { PieceCategory } from '@activepieces/shared';
 import { createIssueAction } from './lib/actions/create-issue-action';
-import { issuesEventTrigger } from './lib/trigger/issue-event';
 import { gitlabAuth } from './lib/auth';
+import { issuesEventTrigger } from './lib/trigger/issue-event';
+import { pushEventTrigger } from './lib/trigger/push-event';
+import { tagPushEventTrigger } from './lib/trigger/tag-push-event';
+import { mergeRequestEventTrigger } from './lib/trigger/merge-request-event';
+import { pipelineEventTrigger } from './lib/trigger/pipeline-event';
+import { noteEventTrigger } from './lib/trigger/note-event';
+import { jobEventTrigger } from './lib/trigger/job-event';
+import { releaseEventTrigger } from './lib/trigger/release-event';
+import { deploymentEventTrigger } from './lib/trigger/deployment-event';
+import { wikiPageEventTrigger } from './lib/trigger/wiki-page-event';
 
 export const gitlab = createPiece({
   displayName: 'GitLab',
@@ -17,16 +25,30 @@ export const gitlab = createPiece({
   minimumSupportedRelease: '0.30.0',
   logoUrl: 'https://cdn.activepieces.com/pieces/gitlab.png',
   categories: [PieceCategory.DEVELOPER_TOOLS],
-  authors: ["kishanprmr","MoShizzle","khaledmashaly","abuaboud"],
+  authors: ['kishanprmr', 'MoShizzle', 'khaledmashaly', 'abuaboud'],
   actions: [
     createIssueAction,
     createCustomApiCallAction({
-      baseUrl: () => 'https://gitlab.com/api/v4',
+      baseUrl: (auth) => {
+        const baseUrl = ((auth as OAuth2PropertyValue).props?.['baseUrl'] as string | undefined) ?? 'https://gitlab.com';
+        return `${baseUrl.replace(/\/$/, '')}/api/v4`;
+      },
       auth: gitlabAuth,
       authMapping: async (auth) => ({
-        Authorization: `Bearer ${(auth).access_token}`,
+        Authorization: `Bearer ${(auth as OAuth2PropertyValue).access_token}`,
       }),
     }),
   ],
-  triggers: [issuesEventTrigger],
+  triggers: [
+    issuesEventTrigger,
+    pushEventTrigger,
+    tagPushEventTrigger,
+    mergeRequestEventTrigger,
+    pipelineEventTrigger,
+    noteEventTrigger,
+    jobEventTrigger,
+    releaseEventTrigger,
+    deploymentEventTrigger,
+    wikiPageEventTrigger,
+  ],
 });

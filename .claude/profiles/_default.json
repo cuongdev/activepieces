@@ -1,0 +1,23 @@
+{
+  "name": "_default",
+  "displayName": "All Skills",
+  "description": "Includes every installed skill, agent, and command",
+  "skills": [
+    "*"
+  ],
+  "agents": [
+    "*"
+  ],
+  "commands": [
+    "*"
+  ],
+  "scripts": [
+    "*"
+  ],
+  "rules": [
+    "*"
+  ],
+  "mcp": [
+    "*"
+  ]
+}

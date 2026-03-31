@@ -1,0 +1,12 @@
+{
+  "name": "devops",
+  "displayName": "DevOps Team",
+  "description": "CI/CD, deployment, server management, infrastructure, and security operations",
+  "extends": "_core",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [],
+  "mcp": []
+}

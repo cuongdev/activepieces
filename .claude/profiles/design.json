@@ -1,0 +1,12 @@
+{
+  "name": "design",
+  "displayName": "Design Team",
+  "description": "UI/UX design, design systems, visual guidelines, and user experience",
+  "extends": "_core",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [],
+  "mcp": []
+}

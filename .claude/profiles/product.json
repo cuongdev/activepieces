@@ -1,0 +1,12 @@
+{
+  "name": "product",
+  "displayName": "Product Team",
+  "description": "Product planning, requirements, roadmaps, and documentation",
+  "extends": "_core",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [],
+  "mcp": []
+}

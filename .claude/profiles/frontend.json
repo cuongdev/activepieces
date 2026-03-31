@@ -1,0 +1,12 @@
+{
+  "name": "frontend",
+  "displayName": "Frontend Team",
+  "description": "Next.js, React, Tailwind, performance, and modern frontend development",
+  "extends": "_core",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [],
+  "mcp": []
+}

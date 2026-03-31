@@ -7,6 +7,7 @@ import { ActivepiecesError,
     FilteredPieceBehavior,
     isNil,
     OPEN_SOURCE_PLAN,
+    SELF_HOSTED_ENTERPRISE_PLAN,
     Platform,
     PlatformId,
     PlatformPlanLimits,
@@ -197,9 +198,9 @@ async function getUsage(log: FastifyBaseLogger, platform: Platform): Promise<Pla
 
 async function getPlan(log: FastifyBaseLogger, platform: Platform): Promise<PlatformPlanLimits> {
     const edition = system.getEdition()
-    if (edition === ApEdition.COMMUNITY) {
+    if (edition === ApEdition.COMMUNITY || edition === ApEdition.ENTERPRISE) {
         return {
-            ...OPEN_SOURCE_PLAN,
+            ...SELF_HOSTED_ENTERPRISE_PLAN,
             stripeSubscriptionStartDate: 0,
             stripeSubscriptionEndDate: 0,
         }

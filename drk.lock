@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "drk-skills": {
+      "source": "https://scm.idlogiq.com/AI/drk-skills",
+      "commit": "f461529b4e15fe0588910407b9d578cd4df72692",
+      "version": "1.2.0",
+      "lastSync": "2026-03-31T08:52:13.374366Z"
+    }
+  },
+  "resources": {}
+}

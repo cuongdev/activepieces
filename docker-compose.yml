@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/activepieces/activepieces:0.79.0
+    image: activepieces-custom:latest
     container_name: activepieces-app
     restart: unless-stopped
     ports:
@@ -11,18 +11,20 @@ services:
     env_file: .env
     environment:
       - AP_CONTAINER_TYPE=APP
+      - AP_LOG_PRETTY=false
     volumes:
       - ./cache:/usr/src/app/cache
     networks:
       - activepieces
   worker:
-    image: ghcr.io/activepieces/activepieces:0.79.0
+    image: activepieces-custom:latest
     restart: unless-stopped
     depends_on:
       - app
     env_file: .env
     environment:
       - AP_CONTAINER_TYPE=WORKER
+      - AP_LOG_PRETTY=false
     deploy:
       replicas: 5
     volumes:
@@ -31,7 +33,7 @@ services:
       - activepieces
   postgres:
     image: 'postgres:14.4'
-    container_name: postgres
+    container_name: activepieces-postgres
     restart: unless-stopped
     env_file: .env
     environment:
@@ -44,7 +46,7 @@ services:
       - activepieces
   redis:
     image: 'redis:7.0.7'
-    container_name: redis
+    container_name: activepieces-redis
     restart: unless-stopped
     volumes:
       - 'redis_data:/data'

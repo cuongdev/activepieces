@@ -20,7 +20,7 @@ export const createIssueAction = createAction({
   },
   async run({ propsValue, auth }) {
     const { projectId, title, description } = propsValue;
-    const client = makeClient({ auth });
+    const client = makeClient(auth);
     return await client.createProjectIssue(projectId as string, {
       title: title,
       description: description,

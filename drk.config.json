@@ -1,0 +1,20 @@
+{
+  "version": "1.4.0",
+  "name": "activepieces",
+  "sources": [
+    {
+      "name": "drk-skills",
+      "type": "gitlab",
+      "url": "https://scm.idlogiq.com/AI/drk-skills",
+      "branch": "main",
+      "basePath": ".claude",
+      "version": "1.2.0"
+    }
+  ],
+  "shared": {
+    "skills": [],
+    "rules": []
+  },
+  "hooks": {},
+  "activeProfile": "_default"
+}

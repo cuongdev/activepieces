@@ -1,0 +1,13 @@
+{
+  "name": "_core",
+  "displayName": "Core",
+  "description": "Shared foundation included in every team profile",
+  "skills": [],
+  "agents": [],
+  "commands": [],
+  "scripts": [],
+  "rules": [
+    "*"
+  ],
+  "mcp": []
+}

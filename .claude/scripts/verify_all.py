@@ -1,0 +1,1 @@
+/Users/cuong/Library/Application Support/drk/registry/drk-skills-e24ef0ccca2f/.claude/scripts/verify_all.py

@@ -9,7 +9,7 @@ export const gitlabCommon = {
       auth: gitlabAuth,
       displayName: 'Project',
       required,
-      refreshers: [],
+      refreshers: ['auth'],
       options: async ({ auth }) => {
         if (!auth) {
           return {
@@ -18,29 +18,24 @@ export const gitlabCommon = {
             options: [],
           };
         }
-        const client = makeClient({
-          auth: auth,
-        });
+        const client = makeClient(auth as OAuth2PropertyValue);
         const res = await client.listProjects({
           simple: true,
           membership: true,
         });
         return {
           disabled: false,
-          options: res.map((project) => {
-            return {
-              label: project.name,
-              value: project.id,
-            };
-          }),
+          options: res.map((project) => ({
+            label: project.name,
+            value: project.id,
+          })),
         };
       },
     }),
 };
 
-export function makeClient(propsValue: {
-  auth: OAuth2PropertyValue;
-}): GitlabApi {
-  const token = getAccessTokenOrThrow(propsValue.auth);
-  return new GitlabApi(token);
+export function makeClient(auth: OAuth2PropertyValue): GitlabApi {
+  const token = getAccessTokenOrThrow(auth);
+  const baseUrl = (auth.props?.['baseUrl'] as string | undefined) ?? 'https://gitlab.com';
+  return new GitlabApi(token, baseUrl);
 }
