@@ -1,4 +1,4 @@
-import { OAuth2PropertyValue } from '@activepieces/pieces-framework';
+import { GitlabAuthValue } from '../auth';
 import { ProjectWebhookRequest } from '../common/models';
 import { makeClient } from '../common';
 
@@ -9,7 +9,7 @@ interface WebhookInformation {
 
 export async function subscribeWebhook(
   projectId: string,
-  auth: OAuth2PropertyValue,
+  auth: GitlabAuthValue,
   webhookUrl: string,
   storeKey: string,
   events: Omit<ProjectWebhookRequest, 'url'>,
@@ -28,7 +28,7 @@ export async function subscribeWebhook(
 }
 
 export async function unsubscribeWebhook(
-  auth: OAuth2PropertyValue,
+  auth: GitlabAuthValue,
   storeKey: string,
   store: { get<T>(key: string): Promise<T | null | undefined> }
 ) {
