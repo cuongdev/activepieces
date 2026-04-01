@@ -8,6 +8,7 @@ import React from 'react';
 
 import { authenticationApi } from '@/api/authentication-api';
 import GoogleIcon from '@/assets/img/custom/auth/google-icon.svg';
+import MicrosoftIcon from '@/assets/img/custom/auth/microsoft.svg';
 import SamlIcon from '@/assets/img/custom/auth/saml.svg';
 import { Button } from '@/components/ui/button';
 import { internalErrorToast } from '@/components/ui/sonner';
@@ -62,6 +63,20 @@ const ThirdPartyLogin = React.memo(({ isSignUp }: { isSignUp: boolean }) => {
           {isSignUp
             ? `${t(`Sign up With`)} ${t('Google')}`
             : `${t(`Sign in With`)} ${t('Google')}`}
+        </Button>
+      )}
+      {thirdPartyAuthProviders?.microsoft && (
+        <Button
+          variant="outline"
+          className="w-full rounded-sm"
+          onClick={(e) =>
+            handleProviderClick(e, ThirdPartyAuthnProviderEnum.MICROSOFT)
+          }
+        >
+          <ThirdPartyIcon icon={MicrosoftIcon} />
+          {isSignUp
+            ? `${t(`Sign up With`)} ${t('Microsoft')}`
+            : `${t(`Sign in With`)} ${t('Microsoft')}`}
         </Button>
       )}
       {thirdPartyAuthProviders?.saml && (
