@@ -1,6 +1,6 @@
 import { isNil } from '@activepieces/shared';
 import { t } from 'i18next';
-import { LockIcon, MailIcon, Earth } from 'lucide-react';
+import { LockIcon, MailIcon, Earth, Building2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { CenteredPage } from '@/app/components/centered-page';
@@ -28,6 +28,7 @@ const SSOPage = () => {
 
   const googleConnected = !isNil(platform.federatedAuthProviders?.google);
   const samlConnected = !isNil(platform.federatedAuthProviders?.saml);
+  const microsoftConnected = !isNil(platform.federatedAuthProviders?.microsoft);
   const emailAuthEnabled = platform.emailAuthEnabled;
 
   const { mutate: toggleEmailAuthentication, isPending } =
@@ -96,6 +97,30 @@ const SSOPage = () => {
                 platform={platform}
                 refetch={refetch}
                 connected={googleConnected}
+              />
+            </ItemActions>
+          </Item>
+
+          <Item variant="outline">
+            <ItemMedia variant="icon">
+              <Building2 />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>{t('Microsoft Entra ID')}</ItemTitle>
+              <ItemDescription>
+                {t(
+                  'Allow logins through Microsoft Entra ID (Azure AD) single sign-on.',
+                )}
+              </ItemDescription>
+            </ItemContent>
+            <ItemActions>
+              <NewOAuth2Dialog
+                providerDisplayName="Microsoft Entra ID"
+                providerName="microsoft"
+                platform={platform}
+                refetch={refetch}
+                connected={microsoftConnected}
+                requiresTenantId={true}
               />
             </ItemActions>
           </Item>

@@ -26,16 +26,18 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 type NewOAuth2DialogProps = {
-  providerName: 'google' | 'github';
+  providerName: 'google' | 'github' | 'microsoft';
   providerDisplayName: string;
   platform: PlatformWithoutSensitiveData;
   connected: boolean;
   refetch: () => Promise<void>;
+  requiresTenantId?: boolean;
 };
 
 const OAuth2FormValues = z.object({
   clientId: z.string().min(1),
   clientSecret: z.string().min(1),
+  tenantId: z.string().optional(),
 });
 type OAuth2FormValues = z.infer<typeof OAuth2FormValues>;
 
@@ -45,6 +47,7 @@ export const NewOAuth2Dialog = ({
   platform,
   connected,
   refetch,
+  requiresTenantId = false,
 }: NewOAuth2DialogProps) => {
   const [open, setOpen] = useState(false);
   const form = useForm<OAuth2FormValues>({
@@ -163,6 +166,24 @@ export const NewOAuth2Dialog = ({
                 </FormItem>
               )}
             />
+            {requiresTenantId && (
+              <FormField
+                name="tenantId"
+                render={({ field }) => (
+                  <FormItem className="grid space-y-4">
+                    <Label htmlFor="tenantId">{t('Directory (Tenant) ID')}</Label>
+                    <Input
+                      {...field}
+                      required
+                      id="tenantId"
+                      placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                      className="rounded-sm"
+                    />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
             {form?.formState?.errors?.root?.serverError && (
               <FormMessage>
                 {form.formState.errors.root.serverError.message}

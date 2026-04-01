@@ -213,6 +213,7 @@ function stripSensitiveData(providers: FederatedAuthnProviderConfig): FederatedA
         google: providers.google ? { clientId: providers.google.clientId } : null,
         github: providers.github ? { clientId: providers.github.clientId } : null,
         saml: providers.saml ? {} : null,
+        microsoft: providers.microsoft ? { clientId: providers.microsoft.clientId, tenantId: providers.microsoft.tenantId } : null,
     }
 }
 
